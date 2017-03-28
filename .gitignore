@@ -4,5 +4,5 @@ dist
 flow-typed
 .tern-port
 *.sqlite
-public/assets
+public
 .env

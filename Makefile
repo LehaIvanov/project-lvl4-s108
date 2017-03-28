@@ -29,6 +29,6 @@ lint:
 	npm run eslint -- src test
 
 publish:
-	npm publish
+	git push heroku master
 
 .PHONY: test

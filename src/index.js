@@ -15,6 +15,7 @@ import flash from 'koa-flash-simple';
 import _ from 'lodash';
 import methodOverride from 'koa-methodoverride';
 import rollbar from 'rollbar';
+import dotenv from 'dotenv';
 
 import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
@@ -23,7 +24,9 @@ import container from './container';
 export default () => {
   const app = new Koa();
 
+  dotenv.config();
   app.keys = ['some secret hurr'];
+  rollbar.init(process.env.ROLLBAR_TOKEN);
   app.use(session(app));
   app.use(flash());
   app.use(async (ctx, next) => {
@@ -50,9 +53,6 @@ export default () => {
   app.use(router.allowedMethods());
   app.use(router.routes());
 
-  rollbar.init('b4fd3e0ed3fb44f5914fc2653d34202d');
-  app.on('error', (err, ctx) => rollbar.handleError(err, ctx));
-
   const pug = new Pug({
     viewPath: path.join(__dirname, 'views'),
     debug: true,
@@ -66,6 +66,8 @@ export default () => {
     ],
   });
   pug.use(app);
+
+  app.on('error', (err, ctx) => rollbar.handleError(err, ctx));
 
   return app;
 };
