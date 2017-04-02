@@ -70,7 +70,6 @@
   },
   "devDependencies": {
     "babel-eslint": "*",
-    "babel-register": "*",
     "eslint": "*",
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-flowtype": "*",
