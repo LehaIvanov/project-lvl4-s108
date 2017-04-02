@@ -1,0 +1,7 @@
+:root {
+  --body_bg_color: color(black lightness(90%));
+}
+
+body {
+  background: var(--body_bg_color);
+}
