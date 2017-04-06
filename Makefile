@@ -20,7 +20,7 @@ build:
 	npm run build
 
 test:
-	NODE_ENV=test npm test
+	NODE_ENV=test DATABASE_URL=sqlite://database.sqlite npm test
 
 check-types:
 	npm run flow
