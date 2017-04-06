@@ -9,6 +9,9 @@
   "engines": {
     "node": "7.7.4"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "scripts": {
     "gulp": "gulp",
     "nodemon": "nodemon",
@@ -77,9 +80,11 @@
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-flowtype": "*",
     "eslint-plugin-import": "*",
-    "flow-bin": "^0.37",
+    "flow-bin": "^0.42",
     "flow-typed": "*",
     "jest": "^18",
-    "nodemon": "*"
+    "jest-supertest-matchers": "*",
+    "nodemon": "*",
+    "supertest": "*"
   }
 }

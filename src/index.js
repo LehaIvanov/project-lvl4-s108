@@ -30,6 +30,7 @@ export default () => {
   app.use(session(app));
   app.use(flash());
   app.use(async (ctx, next) => {
+    // eslint-disable-next-line no-param-reassign
     ctx.state = {
       flash: ctx.flash,
       isSignedIn: () => ctx.session.userId !== undefined,
@@ -37,15 +38,20 @@ export default () => {
     await next();
   });
   app.use(bodyParser());
+  // eslint-disable-next-line consistent-return
   app.use(methodOverride((req) => {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      // eslint-disable-next-line no-underscore-dangle
       return req.body._method;
     }
   }));
   app.use(serve(path.join(__dirname, '..', 'public')));
-  app.use(middleware({
-    config: getWebpackConfig(),
-  }));
+
+  if (process.env.NODE_ENV !== 'test') {
+    app.use(middleware({
+      config: getWebpackConfig(),
+    }));
+  }
 
   app.use(koaLogger());
   const router = new Router();

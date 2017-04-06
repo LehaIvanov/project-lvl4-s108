@@ -15,6 +15,7 @@ export default (router, { User }) => {
         },
       });
       if (user && user.passwordDigest === encrypt(password)) {
+        // eslint-disable-next-line no-param-reassign
         ctx.session.userId = user.id;
         ctx.redirect(router.url('root'));
         return;
@@ -24,6 +25,7 @@ export default (router, { User }) => {
       ctx.render('sessions/new', { f: buildFormObj({ email }) });
     })
     .delete('session', '/session', (ctx) => {
+      // eslint-disable-next-line no-param-reassign
       ctx.session = {};
       ctx.redirect(router.url('root'));
     });
